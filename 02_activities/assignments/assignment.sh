@@ -18,6 +18,7 @@ cd newproject
 
 mkdir analysis output
 touch README.md
+echo "# Project Name: DSI Consulting Inc." > README.md
 touch analysis/main.py
 
 # download client data
@@ -26,31 +27,33 @@ unzip -q rawdata.zip
 
 ###########################################
 # Complete assignment here
+#Final submission 2 
 
 # 1. Create a directory named data
-mkdir data 
+mkdir -p data 
 
 # 2. Move the ./rawdata directory to ./data/raw (eg. move it into ./data and rename it to raw)
-mv ./rawdata ./data/raw 
+mv -f ./rawdata ./data/raw 
 
 # 3. List the contents of the ./data/raw directory
-ls 
+ls ./data/raw
 # 4. Create the directory ./data/processed, 
 #    then create the following sub-directories within it: server_logs, user_logs, and event_logs
-mkdir ./data/processed 
-touch server_logs 
-touch user_logs 
-touch event_logs 
+mkdir -p  ./data/processed 
+mkdir -p ./data/processed/server_logs/
+mkdir -p ./data/processed/user_logs/
+mkdir -p ./data/processed/event_logs/
 # 5. Copy all server log files (files with "server" in the name AND a .log extension) from ./data/raw to ./data/processed/server_logs
-cp -iv ./data/raw/*server*.log ./data/process/
+cp -iv ./data/raw/*server*.log ./data/processed/
+cp -iv ./data/raw/*server* ./data/processed/server_logs/
 # 6. Repeat the above step for user logs and event logs
-cp -iv ./data/raw/*user*.log ./data/process/
-cp -iv ./data/raw/*event*.log ./data/process/
+cp -iv ./data/raw/*user*.log ./data/processed/user_logs/
+cp -iv ./data/raw/*event*.log ./data/processed/event_logs/
 # 7. For user privacy, remove all files containing IP addresses (files with "ipaddr" in the filename) from ./data/raw and ./data/processed/user_logs
-rm ./data/raw/*ipaddr*
+rm -f ./data/raw/*ipaddr*
+rm -f ./data/processed/user_logs/*ipaddr*
 # 8. Create a file named ./data/inventory.txt that lists all the files in the subfolders of ./data/processed
-touch ./data/inventory.txt
-find ./data/processed -mindepth 2 -type f > ./data/inventory.txt
+find ./data/processed -type f > ./data/inventory.txt
 ###########################################
 
 echo "Project setup is complete!"
